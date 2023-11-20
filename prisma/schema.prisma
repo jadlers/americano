@@ -9,3 +9,31 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Tournament {
+  id            String   @id @default(uuid()) @db.Uuid
+  courts        Court[]
+  players       Player[]
+  pointsPerGame Int
+}
+
+model Court {
+  id              Int    @id @default(autoincrement())
+  name            String
+  numberOfPlayers Int
+
+  // Auto generated
+  Tournament   Tournament? @relation(fields: [tournamentId], references: [id])
+  tournamentId String?     @db.Uuid
+}
+
+model Player {
+  id     Int    @id @default(autoincrement())
+  name   String
+  points Int    @default(0)
+  games  Int    @default(0)
+
+  // Auto generated
+  Tournament   Tournament? @relation(fields: [tournamentId], references: [id])
+  tournamentId String?     @db.Uuid
+}
