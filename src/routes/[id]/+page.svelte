@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Standings from './Standings.svelte';
 	export let data: PageData;
 	export let form: ActionData;
 </script>
@@ -7,13 +8,7 @@
 <p>Antal poäng per match: {data.pointsPerGame}p</p>
 
 <h2>Spelare</h2>
-<ul>
-	{#each data.players as player (player.id)}
-		<li>
-			{player.points}p - {player.name}
-		</li>
-	{/each}
-</ul>
+<Standings players={data.players} />
 
 <h2>Planer</h2>
 <ul>
