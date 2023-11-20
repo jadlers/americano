@@ -12,28 +12,37 @@ datasource db {
 
 model Tournament {
   id            String   @id @default(uuid()) @db.Uuid
+  createdAt     DateTime @default(now())
   courts        Court[]
   players       Player[]
+  games         Game[]
   pointsPerGame Int
 }
 
 model Court {
-  id              Int    @id @default(autoincrement())
+  id              Int         @id @default(autoincrement())
   name            String
   numberOfPlayers Int
-
-  // Auto generated
-  Tournament   Tournament? @relation(fields: [tournamentId], references: [id])
-  tournamentId String?     @db.Uuid
+  Tournament      Tournament? @relation(fields: [tournamentId], references: [id])
+  tournamentId    String?     @db.Uuid
 }
 
 model Player {
-  id     Int    @id @default(autoincrement())
-  name   String
-  points Int    @default(0)
-  games  Int    @default(0)
+  id            Int         @id @default(autoincrement())
+  name          String
+  points        Int         @default(0)
+  numberOfGames Int         @default(0)
+  Tournament    Tournament? @relation(fields: [tournamentId], references: [id])
+  tournamentId  String?     @db.Uuid
+}
 
-  // Auto generated
+model Game {
+  id           String      @id @default(uuid()) @db.Uuid
+  round        Int
+  team1        Int[]
+  team2        Int[]
+  score1       Int
+  score2       Int
   Tournament   Tournament? @relation(fields: [tournamentId], references: [id])
   tournamentId String?     @db.Uuid
 }
