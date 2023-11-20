@@ -34,6 +34,8 @@ model Player {
   numberOfGames Int         @default(0)
   Tournament    Tournament? @relation(fields: [tournamentId], references: [id])
   tournamentId  String?     @db.Uuid
+
+  @@unique([name, tournamentId])
 }
 
 model Game {
