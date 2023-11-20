@@ -1,2 +1,28 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	export let data: PageData;
+	export let form: ActionData;
+	console.log(data);
+</script>
+
+<h1>Padel turnering</h1>
+
+<h2>Existerande turneringar</h2>
+<ul>
+	{#each data.tournaments as tournament}
+		<li><a href={`/${tournament.id}`}>{tournament.id} - {tournament.createdAt}</a></li>
+	{/each}
+</ul>
+
+<h2>Skapa ny</h2>
+<form method="POST" action="?/create">
+	<label>
+		Poäng per spel
+		<input name="points" type="number" min="0" step="1" />
+	</label>
+	<input type="submit" value="skapa" />
+</form>
+{#if form?.id}
+	<p>Ny turnering skapad: <a href={`/${form.id}`}>här</a></p>
+{:else if form?.error}
+	<p>Fel: {form.error}</p>
+{/if}
