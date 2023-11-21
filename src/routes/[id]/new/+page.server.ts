@@ -53,7 +53,7 @@ export const load = (async ({ params: { id } }) => {
 
 	const assignedCourts: Record<string, any[]> = {};
 	for (const court of courts) {
-		assignedCourts[court.name] = selectedPlayers.slice(0, court.numberOfPlayers);
+		assignedCourts[court.name] = selectedPlayers.splice(0, court.numberOfPlayers);
 	}
 
 	return {
