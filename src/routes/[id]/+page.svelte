@@ -17,7 +17,7 @@
 <Standings players={data.players} />
 
 <h2>Matcher</h2>
-<a href={`${$page.url.pathname}/new`}>Ny match</a>
+<!-- <a href={`${$page.url.pathname}/new`}>Ny match</a> -->
 
 {#each roundsReversed as round}
 	<h3>Runda {round}</h3>
