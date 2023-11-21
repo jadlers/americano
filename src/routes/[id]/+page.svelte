@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { teamMembers } from '$lib/util';
 	import Standings from './Standings.svelte';
 	export let data: PageData;
 	export let form: ActionData;
-
-	const teamMembers = (team: { name: string }[]): string =>
-		team.map((player) => player.name).join(' & ');
 </script>
 
 <h1>Turnering</h1>
