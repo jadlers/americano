@@ -30,7 +30,15 @@ export const load = (async ({ params: { id } }) => {
 		team1: g.team1.map((p) => playerMap[p]),
 		team2: g.team2.map((p) => playerMap[p])
 	}));
-	return { ...tournament, games: mappedGames, players };
+
+	const groupedGames = mappedGames.reduce(
+		(acc, cur) => {
+			acc[cur.round] = (acc[cur.round] ?? []).concat(cur);
+			return acc;
+		},
+		{} as Record<number, any>
+	);
+	return { ...tournament, games: groupedGames, players };
 }) satisfies PageServerLoad;
 
 export const actions = {

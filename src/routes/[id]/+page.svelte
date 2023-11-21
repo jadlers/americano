@@ -4,6 +4,10 @@
 	import Standings from './Standings.svelte';
 	export let data: PageData;
 	export let form: ActionData;
+
+	const roundsReversed = Object.keys(data.games)
+		.map((r) => parseInt(r))
+		.sort((a, b) => b - a);
 </script>
 
 <h1>Turnering</h1>
@@ -15,14 +19,21 @@
 <h2>Matcher</h2>
 <a href={`${$page.url.pathname}/new`}>Ny match</a>
 
-<ul>
-	{#each data.games as match}
-		<li>
-			<a href={`${$page.url.pathname}/${match.id}`}><strong>{match.courtName}</strong></a>:
-			{teamMembers(match.team1)} vs. {teamMembers(match.team2)}
-		</li>
-	{/each}
-</ul>
+{#each roundsReversed as round}
+	<h3>Runda {round}</h3>
+	<ul>
+		{#each data.games[round] as match (match.id)}
+			<li>
+				<a href={`${$page.url.pathname}/${match.id}`}><strong>{match.courtName}</strong></a>:
+				{#if match.score1 && match.score2}
+					{teamMembers(match.team1)} {match.score1}p vs. {match.score2}p {teamMembers(match.team2)}
+				{:else}
+					{teamMembers(match.team1)} vs. {teamMembers(match.team2)}
+				{/if}
+			</li>
+		{/each}
+	</ul>
+{/each}
 
 <h2>Planer</h2>
 <ul>
