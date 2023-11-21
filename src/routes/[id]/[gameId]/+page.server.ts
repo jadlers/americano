@@ -20,9 +20,15 @@ export const actions = {
 		const data = await request.formData();
 
 		// Remove previous score from user, if first time adding will remove 0
-		const game = await prisma.game.findFirstOrThrow({
-			where: { id: gameId }
-		});
+		const [game, t] = await Promise.all([
+			prisma.game.findFirstOrThrow({
+				where: { id: gameId }
+			}),
+			prisma.tournament.findFirst({
+				select: { pointsPerGame: true },
+				where: { id }
+			})
+		]);
 
 		const score1str = data.get('score1');
 		const score2str = data.get('score2');
@@ -30,6 +36,10 @@ export const actions = {
 			return fail(400, { error: 'missing required score' });
 		const score1 = parseInt(score1str);
 		const score2 = parseInt(score2str);
+
+		const ppg = t?.pointsPerGame ?? 0;
+		if (score1 + score2 !== ppg)
+			return fail(400, { error: `sum of points not equal game points of: ${ppg}` });
 
 		// reset if points are already given
 		if (game.score1 !== 0 && game.score2 !== 0) {

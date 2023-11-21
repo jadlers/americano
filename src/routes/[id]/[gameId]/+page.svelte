@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { teamMembers } from '$lib/util';
 	export let data: PageLoad;
+	export let form: FormData;
 </script>
 
 <h1>Match {data.game.id}</h1>
@@ -30,3 +31,7 @@
 	<br />
 	<input type="submit" value="skicka in" />
 </form>
+
+{#if form?.error}
+	<p style="color: red;">{form.error}</p>
+{/if}
