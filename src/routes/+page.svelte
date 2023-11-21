@@ -1,7 +1,6 @@
 <script lang="ts">
 	export let data: PageData;
 	export let form: ActionData;
-	console.log(data);
 </script>
 
 <h1>Padel turnering</h1>
@@ -9,7 +8,9 @@
 <h2>Existerande turneringar</h2>
 <ul>
 	{#each data.tournaments as tournament}
-		<li><a href={`/${tournament.id}`}>{tournament.id} - {tournament.createdAt}</a></li>
+		<li>
+			<a href={`/${tournament.id}`}>{tournament.createdAt.toISOString()} - {tournament.id}</a>
+		</li>
 	{/each}
 </ul>
 
