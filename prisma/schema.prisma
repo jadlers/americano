@@ -43,8 +43,8 @@ model Game {
   round        Int
   team1        Int[]
   team2        Int[]
-  score1       Int
-  score2       Int
+  score1       Int?        @default(0)
+  score2       Int?        @default(0)
   Tournament   Tournament? @relation(fields: [tournamentId], references: [id])
   tournamentId String?     @db.Uuid
 }
