@@ -3,17 +3,21 @@ import { fail } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load = (async ({ params: { id } }) => {
-	const tournament = await prisma.tournament.findUnique({
-		select: { pointsPerGame: true, courts: true },
-		where: { id }
-	});
-	const players = await prisma.player.findMany({
-		where: { tournamentId: id },
-		orderBy: { points: 'desc' }
-	});
-	const games = await prisma.game.findMany({
-		where: { tournamentId: id }
-	});
+	const [tournament, players, games] = await Promise.all([
+		prisma.tournament.findUnique({
+			select: { pointsPerGame: true, courts: true },
+			where: { id }
+		}),
+		prisma.player.findMany({
+			where: { tournamentId: id },
+			orderBy: { points: 'desc' }
+		}),
+		prisma.game.findMany({
+			where: { tournamentId: id }
+		})
+	]);
+
+	// Add names to players before showing
 	const playerMap = players.reduce(
 		(acc, cur) => {
 			acc[cur.id] = cur;
