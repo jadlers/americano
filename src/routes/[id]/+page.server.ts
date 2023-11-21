@@ -4,7 +4,7 @@ import type { Actions, PageServerLoad } from './$types';
 
 export const load = (async ({ params: { id } }) => {
 	const tournament = await prisma.tournament.findUnique({
-		select: { pointsPerGame: true, courts: true },
+		select: { pointsPerGame: true, courts: true, games: true },
 		where: { id }
 	});
 	const players = await prisma.player.findMany({

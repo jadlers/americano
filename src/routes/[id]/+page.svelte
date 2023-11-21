@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import Standings from './Standings.svelte';
 	export let data: PageData;
 	export let form: ActionData;
@@ -9,6 +10,15 @@
 
 <h2>Spelare</h2>
 <Standings players={data.players} />
+
+<h2>Matcher</h2>
+<a href={`${$page.url.pathname}/new`}>Ny match</a>
+
+<ul>
+	{#each data.games as match}
+		<li>{match.id}: {match.team1.join(' & ')} vs. {match.team2.join(' & ')}</li>
+	{/each}
+</ul>
 
 <h2>Planer</h2>
 <ul>
