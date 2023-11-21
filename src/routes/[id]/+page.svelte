@@ -20,7 +20,8 @@
 <ul>
 	{#each data.games as match}
 		<li>
-			<strong>{match.courtName}</strong>: {teamMembers(match.team1)} vs. {teamMembers(match.team2)}
+			<a href={`${$page.url.pathname}/${match.id}`}><strong>{match.courtName}</strong></a>:
+			{teamMembers(match.team1)} vs. {teamMembers(match.team2)}
 		</li>
 	{/each}
 </ul>
