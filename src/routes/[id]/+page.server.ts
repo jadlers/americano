@@ -4,14 +4,29 @@ import type { Actions, PageServerLoad } from './$types';
 
 export const load = (async ({ params: { id } }) => {
 	const tournament = await prisma.tournament.findUnique({
-		select: { pointsPerGame: true, courts: true, games: true },
+		select: { pointsPerGame: true, courts: true },
 		where: { id }
 	});
 	const players = await prisma.player.findMany({
 		where: { tournamentId: id },
 		orderBy: { points: 'desc' }
 	});
-	return { ...tournament, players };
+	const games = await prisma.game.findMany({
+		where: { tournamentId: id }
+	});
+	const playerMap = players.reduce(
+		(acc, cur) => {
+			acc[cur.id] = cur;
+			return acc;
+		},
+		{} as Record<number, any>
+	);
+	const mappedGames = games.map((g) => ({
+		...g,
+		team1: g.team1.map((p) => playerMap[p]),
+		team2: g.team2.map((p) => playerMap[p])
+	}));
+	return { ...tournament, games: mappedGames, players };
 }) satisfies PageServerLoad;
 
 export const actions = {

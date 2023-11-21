@@ -3,6 +3,9 @@
 	import Standings from './Standings.svelte';
 	export let data: PageData;
 	export let form: ActionData;
+
+	const teamMembers = (team: { name: string }[]): string =>
+		team.map((player) => player.name).join(' & ');
 </script>
 
 <h1>Turnering</h1>
@@ -16,7 +19,9 @@
 
 <ul>
 	{#each data.games as match}
-		<li>{match.id}: {match.team1.join(' & ')} vs. {match.team2.join(' & ')}</li>
+		<li>
+			<strong>{match.courtName}</strong>: {teamMembers(match.team1)} vs. {teamMembers(match.team2)}
+		</li>
 	{/each}
 </ul>
 
