@@ -1,5 +1,5 @@
 import prisma from '$lib/prisma';
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load = (async ({ params: { id, gameId } }) => {
@@ -16,7 +16,7 @@ export const load = (async ({ params: { id, gameId } }) => {
 }) satisfies PageServerLoad;
 
 export const actions = {
-	default: async ({ request, params: { gameId } }) => {
+	default: async ({ request, params: { id, gameId } }) => {
 		const data = await request.formData();
 
 		// Remove previous score from user, if first time adding will remove 0
@@ -81,5 +81,7 @@ export const actions = {
 				})
 			)
 		]);
+
+		throw redirect(303, `/${id}`);
 	}
 } satisfies Actions;
