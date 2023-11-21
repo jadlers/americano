@@ -41,6 +41,7 @@ model Player {
 model Game {
   id           String      @id @default(uuid()) @db.Uuid
   round        Int
+  courtName    String
   team1        Int[]
   team2        Int[]
   score1       Int?        @default(0)
