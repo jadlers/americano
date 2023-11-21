@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { skipPoints } from '$lib/util';
 	export let data: PageData;
 	const courts = Object.entries(data.courts);
 </script>
@@ -37,3 +38,7 @@
 
 	<input type="submit" value="lås in matcher" />
 </form>
+
+<p>
+	Notera att alla som står över denna match kommer bli tilldelade {skipPoints(data.pointsPerGame)}p
+</p>
