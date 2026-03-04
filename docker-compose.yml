@@ -1,6 +1,13 @@
 version: '3.6'
 
 services:
+  site:
+    build:
+      context: .
+    env_file: .env
+    ports:
+      - 20220:3000
+
   db:
     restart: unless-stopped
     image: postgres:15-alpine
