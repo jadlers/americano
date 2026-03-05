@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let players;
+	let { players } = $props();
 </script>
 
 <table>

@@ -1,7 +1,11 @@
 <script lang="ts">
 	import { teamMembers } from '$lib/util';
-	export let data: PageLoad;
-	export let form: FormData;
+	interface Props {
+		data: PageLoad;
+		form: FormData;
+	}
+
+	let { data, form }: Props = $props();
 </script>
 
 <h1>Match {data.game.id}</h1>

@@ -1,6 +1,10 @@
 <script lang="ts">
-	export let data: PageData;
-	export let form: ActionData;
+	interface Props {
+		data: PageData;
+		form: ActionData;
+	}
+
+	let { data, form }: Props = $props();
 </script>
 
 <h1>Padel turnering</h1>
