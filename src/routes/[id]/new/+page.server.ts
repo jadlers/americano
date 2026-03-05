@@ -115,6 +115,6 @@ export const actions = {
 			data: { points: { increment: skipPoints(pointsPerGame) } }
 		});
 
-		throw redirect(303, `/${id}`);
+		redirect(303, `/${id}`);
 	}
 } satisfies Actions;
