@@ -15,7 +15,7 @@
 	{#each courts as [court, players]}
 		<div>
 			<h2>{court}</h2>
-				<p>{players.map((p) => p.name).join(', ')}</p>
+			<p>{players.map((p) => p.name).join(', ')}</p>
 			{#each players as courtPlayer, idx}
 				<select name={`${court}-team${idx < players.length / 2 ? 1 : 2}`}>
 					{#each data.allPlayers as player}
