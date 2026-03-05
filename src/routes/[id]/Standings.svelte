@@ -29,8 +29,7 @@
 		padding: 4px;
 	}
 
-	thead,
-	tfoot {
+	thead {
 		background-color: #333;
 		color: #fff;
 	}

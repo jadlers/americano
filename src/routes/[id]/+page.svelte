@@ -41,7 +41,7 @@
 
 <h2>Planer</h2>
 <ul>
-	{#each data.courts as court (court.id)}
+	{#each data.value.courts as court (court.id)}
 		<li>
 			{court.name} - {court.numberOfPlayers} spelare
 		</li>
@@ -56,8 +56,8 @@
 	</label>
 	<input type="submit" value="lägg till" />
 </form>
-{#if form?.action === 'addPlayer'}
-	<p>Kunde inte lägga till spelare: {form.error}</p>
+{#if form.value?.action === 'addPlayer'}
+	<p>Kunde inte lägga till spelare: {form.value.error}</p>
 {/if}
 
 <h2>Lägg till bana</h2>
@@ -72,6 +72,6 @@
 	</label>
 	<input type="submit" value="lägg till" />
 </form>
-{#if form?.action === 'addCourt'}
-	<p>Kunde inte lägga till plan: {form.error}</p>
+{#if form.value?.action === 'addCourt'}
+	<p>Kunde inte lägga till plan: {form.value.error}</p>
 {/if}
