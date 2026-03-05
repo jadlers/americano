@@ -2,12 +2,9 @@
 	import { page } from '$app/stores';
 	import { teamMembers } from '$lib/util';
 	import Standings from './Standings.svelte';
-	interface Props {
-		data: PageData;
-		form: ActionData;
-	}
+	import type { PageProps } from './$types';
 
-	let { data, form }: Props = $props();
+	let { data, form }: PageProps = $props();
 
 	const roundsReversed = Object.keys(data.games)
 		.map((r) => parseInt(r))
@@ -41,7 +38,7 @@
 
 <h2>Planer</h2>
 <ul>
-	{#each data.value.courts as court (court.id)}
+	{#each data.courts as court (court.id)}
 		<li>
 			{court.name} - {court.numberOfPlayers} spelare
 		</li>
@@ -56,8 +53,8 @@
 	</label>
 	<input type="submit" value="lägg till" />
 </form>
-{#if form.value?.action === 'addPlayer'}
-	<p>Kunde inte lägga till spelare: {form.value.error}</p>
+{#if form?.action === 'addPlayer'}
+	<p>Kunde inte lägga till spelare: {form.error}</p>
 {/if}
 
 <h2>Lägg till bana</h2>
@@ -72,6 +69,6 @@
 	</label>
 	<input type="submit" value="lägg till" />
 </form>
-{#if form.value?.action === 'addCourt'}
-	<p>Kunde inte lägga till plan: {form.value.error}</p>
+{#if form?.action === 'addCourt'}
+	<p>Kunde inte lägga till plan: {form.error}</p>
 {/if}
