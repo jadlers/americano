@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import type { PageData } from './$types';
 	import { skipPoints } from '$lib/util';
 	export let data: PageData;
 	const courts = Object.entries(data.courts);
