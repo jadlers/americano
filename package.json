@@ -17,6 +17,7 @@
 		"@sveltejs/adapter-node": "^5.5.4",
 		"@sveltejs/kit": "^2.53.4",
 		"@types/node": "^25.3.3",
+		"@types/pg": "^8.18.0",
 		"@typescript-eslint/eslint-plugin": "^8.56.1",
 		"@typescript-eslint/parser": "^8.56.1",
 		"eslint": "^10.0.2",
@@ -36,6 +37,8 @@
 	"type": "module",
 	"dependencies": {
 		"@prisma/adapter-pg": "^7.4.2",
-		"@sveltejs/vite-plugin-svelte": "^4.0.4"
+		"@sveltejs/vite-plugin-svelte": "^4.0.4",
+		"dotenv": "^17.3.1",
+		"pg": "^8.20.0"
 	}
 }
