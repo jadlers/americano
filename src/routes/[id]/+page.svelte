@@ -2,8 +2,9 @@
 	import { page } from '$app/stores';
 	import { teamMembers } from '$lib/util';
 	import Standings from './Standings.svelte';
-	export let data: PageData;
-	export let form: ActionData;
+	import type { PageProps } from './$types';
+
+	let { data, form }: PageProps = $props();
 
 	const roundsReversed = Object.keys(data.games)
 		.map((r) => parseInt(r))

@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let players;
+	let { players } = $props();
 </script>
 
 <table>
@@ -29,8 +29,7 @@
 		padding: 4px;
 	}
 
-	thead,
-	tfoot {
+	thead {
 		background-color: #333;
 		color: #fff;
 	}

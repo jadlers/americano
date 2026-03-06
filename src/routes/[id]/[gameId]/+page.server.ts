@@ -92,6 +92,6 @@ export const actions = {
 			)
 		]);
 
-		throw redirect(303, `/${id}`);
+		redirect(303, `/${id}`);
 	}
 } satisfies Actions;

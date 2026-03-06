@@ -1,7 +1,8 @@
 <script lang="ts">
-	import type { PageData } from './$types';
+	import type { PageProps } from './$types';
 	import { skipPoints } from '$lib/util';
-	export let data: PageData;
+
+	let { data }: PageProps = $props();
 	const courts = Object.entries(data.courts);
 </script>
 

@@ -2,11 +2,8 @@ import prisma from '$lib/prisma';
 import { fail } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
-const tournaments = [{ name: 'one' }, { name: 'two' }];
-
-export const load = async () => {
+export const load: PageServerLoad = async () => {
 	const response = await prisma.tournament.findMany();
-	console.log(response);
 	return { tournaments: response };
 };
 
@@ -15,7 +12,6 @@ export const actions = {
 		const data = await request.formData();
 		const ppg = data.get('points');
 		if (!ppg) return fail(400, { error: 'missing pointsPerGame' });
-		console.log({ ppg });
 		const pointsPerGame = parseInt(ppg.toString());
 		if (!pointsPerGame) return fail(400, { error: 'pointsPerGame not a number' });
 		const tournament = await prisma.tournament.create({ data: { pointsPerGame } });

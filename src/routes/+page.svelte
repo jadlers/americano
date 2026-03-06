@@ -1,6 +1,6 @@
 <script lang="ts">
-	export let data: PageData;
-	export let form: ActionData;
+	import type { PageProps } from './$types';
+	let { data, form }: PageProps = $props();
 </script>
 
 <h1>Padel turnering</h1>
