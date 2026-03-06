@@ -3,7 +3,7 @@
 	import { skipPoints } from '$lib/util';
 
 	let { data }: PageProps = $props();
-	const courts = Object.entries(data.courts);
+	const courts = $derived(Object.entries(data.courts));
 </script>
 
 <h1>Skapa nya matcher</h1>

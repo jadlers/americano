@@ -6,9 +6,11 @@
 
 	let { data, form }: PageProps = $props();
 
-	const roundsReversed = Object.keys(data.games)
-		.map((r) => parseInt(r))
-		.sort((a, b) => b - a);
+	const roundsReversed = $derived(
+		Object.keys(data.games)
+			.map((r) => parseInt(r))
+			.sort((a, b) => b - a)
+	);
 </script>
 
 <h1>Turnering</h1>
